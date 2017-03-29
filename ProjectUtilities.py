@@ -12,7 +12,7 @@ cmd = {
     'cmd_name': 'Archive Project',
     'cmd_description': 'Export All files from Current Fusion 360 Project',
     'cmd_id': 'cmdID_ProjectUtilities_Archive',
-    'cmd_resources': './resources',
+    'cmd_resources': './resources/Archive',
     'workspace': 'FusionSolidEnvironment',
     'toolbar_panel_id': 'SolidScriptsAddinsPanel',
     'class': ArchiveCommand
@@ -24,7 +24,7 @@ cmd = {
     'cmd_name': 'Project Statistics',
     'cmd_description': 'Get Statistics about current Fusion 360 Project',
     'cmd_id': 'cmdID_ProjectUtilities_Statistics',
-    'cmd_resources': './resources',
+    'cmd_resources': './resources/Icons',
     'workspace': 'FusionSolidEnvironment',
     'toolbar_panel_id': 'SolidScriptsAddinsPanel',
     'class': StatsCommand
@@ -36,7 +36,7 @@ cmd = {
     'cmd_name': 'Close Documents',
     'cmd_description': 'Close All Documents',
     'cmd_id': 'cmdID_Close_Docs',
-    'cmd_resources': './resources',
+    'cmd_resources': './resources/Icons',
     'workspace': 'FusionSolidEnvironment',
     'toolbar_panel_id': 'SolidScriptsAddinsPanel',
     'class': CloseDocsCommand
