@@ -17,8 +17,11 @@ def traverse_folder(data_folder, file_stats, folder_stats):
 
     # TODO handle drawings
     for data_file in data_folder.dataFiles:
-        if data_file.fileExtension in ["f3d", "f2d"]:
-            file_stats.append(get_stats(data_file))
+
+        # if data_file.fileExtension in ["f3d", "f2d"]:
+        #     file_stats.append(get_stats(data_file))
+
+        file_stats.append(get_stats(data_file))
 
     return file_stats, folder_stats
 
