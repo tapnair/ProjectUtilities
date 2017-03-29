@@ -1,5 +1,9 @@
-# Project-Archiver
-The archiver script will open all Fusion 360 3D data in a project and export it as STEP to a local location of your choosing. 
+# Project Utilities
+Utilities to manage Fusion 360 Projects
+
+Archive - Allows for the export of all designs as STEP, f3d or other neutral formats
+
+Statistics - Gives releant statistics about all files and folders in a given project
 
 [How to install](#How-to-install)  
 [How to use](#How-to-use)
