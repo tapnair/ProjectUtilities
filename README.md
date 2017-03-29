@@ -60,14 +60,21 @@ Download the REPO.
 ## How to use<a name="How-to-use"></a>
 
 Launch Fusion 360.
-Under the **Scripts and Addins** select Arcive-export.
-In the data panel navigate to the project you want to archive.
-The add-in will export all Fusion 360 files in the active project.
+In the **Scripts and Addins** select Add-ins and then "ProjectUtilities"
 
-![](resources/dialog.png)
+In the data panel navigate to the project you want to archive.
+
+_The add-in will export all Fusion 360 files in the active project._
+
+The commands will now be in the Add-ins drop down menu:
+
+![](resources/drop_down_menu.png)
+
 
 ### Archive
 The dialog shows you the **Project to Archive** which is the current active project.
+
+![](resources/dialog.png)
 
 It then allows you to enter a path. Type in a path into the **Output Path** field.
 * For OSX this might be: **/Users/*username*/Desktop/Test/**
@@ -81,6 +88,8 @@ Fusion will open and export each 3D design. Depending on the size of design and 
 
 ### Statistics
 Select the Statistics command from the addins drop down.
+
+![](resources/statistics_menu.png)
 
 It then allows you to enter a path. Type in a path into the **Output Path** field.
 
