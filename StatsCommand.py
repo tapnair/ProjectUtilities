@@ -80,7 +80,7 @@ def get_file_path():
 
     # Get Home directory
     default_path = expanduser("~")
-    default_path += '/ProjectArchiver/'
+    default_path += '/ProjectUtilities/'
     default_path += project_name
     default_path += '/'
 
