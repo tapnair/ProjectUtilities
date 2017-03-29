@@ -60,7 +60,8 @@ Download the REPO.
 ## How to use<a name="How-to-use"></a>
 
 Launch Fusion 360.
-In the **Scripts and Addins** select Add-ins and then "ProjectUtilities"
+
+In the **Scripts and Addins** dialog box select Add-ins and then "ProjectUtilities"
 
 In the data panel navigate to the project you want to archive.
 
@@ -94,12 +95,12 @@ Select the Statistics command from the addins drop down.
 It then allows you to enter a path. Type in a path into the **Output Path** field.
 
 * For OSX this might be: **/Users/*username*/Desktop/Test/**
-
 * For Windows this might be something like **C:\Test**
 
 The default will be into: HOME/ProjectUtilities/**Project_Name**
 
 _files.csv_ : Contains information about all files in the project
+
 _folders.csv_ : Contains information about all the folders in the project
 
 
