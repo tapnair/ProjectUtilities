@@ -48,7 +48,7 @@ Download the REPO.
 
 	![](resources/scripts-addins.png)
 
-3. Select the **Addins tab** and find the Archive-Exporter.  
+3. Select the **Addins tab** and find: ProjectUtilities.  
 4. Click **Run at startup**. 
 5. Click run.  
  
