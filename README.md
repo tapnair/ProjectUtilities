@@ -53,7 +53,7 @@ Download the REPO.
 6. Dismiss the Addins dialog.  
 7.  On the main toolbar click the **Scripts and Addins** menu and you should see **Archive-Exporter** Pane.
 
-	![](resources/button.png)
+	![](resources/drop_down_menu.png)
 
 ----
 
