@@ -1,8 +1,9 @@
 # Author-Patrick Rainsberry
 # Description-Set of Utilities for Managing Fusion 360 Projects
 
-from .ArchiveCommand import ArchiveCommand, CloseDocsCommand
+from .ArchiveCommand import ArchiveCommand
 from .StatsCommand import StatsCommand
+from .CloseAllCommand import CloseAllCommand
 
 commands = []
 command_definitions = []
@@ -33,13 +34,14 @@ command_definitions.append(cmd)
 
 # Define parameters for 3rd command
 cmd = {
-    'cmd_name': 'Close Documents',
-    'cmd_description': 'Close All Documents',
+    'cmd_name': 'Close All Documents',
+    'cmd_description': 'NOTE: This closes all documents WITHOUT prompting to save',
     'cmd_id': 'cmdID_Close_Docs',
     'cmd_resources': './resources/Icons',
     'workspace': 'FusionSolidEnvironment',
     'toolbar_panel_id': 'SolidScriptsAddinsPanel',
-    'class': CloseDocsCommand
+    'command_visible': True,
+    'class': CloseAllCommand
 }
 command_definitions.append(cmd)
 

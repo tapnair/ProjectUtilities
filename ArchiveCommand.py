@@ -122,14 +122,3 @@ class ArchiveCommand(Fusion360CommandBase):
         drop_input_list.add('STL', False)
 
 
-class CloseDocsCommand(Fusion360CommandBase):
-
-    def on_execute(self, command, inputs, args, input_values):
-
-        document = get_app_objects()['document']
-
-        if document.isSaved:
-            document.close(False)
-
-            close_command = get_app_objects()['ui'].commandDefinitions.itemById('cmdID_Close_Docs')
-            close_command.execute()

@@ -165,6 +165,8 @@ class Fusion360CommandBase:
 
         self.command_in_nav_bar = cmd_def.get('command_in_nav_bar', False)
 
+        self.command_visible = cmd_def.get('command_visible', True)
+
         self.debug = debug
 
         # global set of event handlers to keep them referenced for the duration of the command
@@ -224,7 +226,11 @@ class Fusion360CommandBase:
                 handlers.append(on_command_created_handler)
 
                 new_control = controls_to_add_to.addCommand(cmd_definition)
-                new_control.isVisible = True
+                if self.command_visible:
+                    new_control.isVisible = True
+
+                else:
+                    new_control.isVisible = False
 
         except:
             if ui:

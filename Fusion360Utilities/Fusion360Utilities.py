@@ -8,6 +8,14 @@ import traceback
 # Externally usable function to get all relevant application objects easily in a dictionary
 def get_app_objects():
 
+    design = None
+    units_manager = None
+    all_occurrences = None
+    all_components = None
+    root_comp = None
+    time_line = None
+    export_manager = None
+
     app = adsk.core.Application.cast(adsk.core.Application.get())
 
     # Get import manager
@@ -16,20 +24,30 @@ def get_app_objects():
     # Get User Interface
     ui = app.userInterface
 
-    # Get active design
-    product = app.activeProduct
-    design = adsk.fusion.Design.cast(product)
+    # Get the active document
     document = app.activeDocument
 
-    # Get Design specific elements
-    units_manager = design.fusionUnitsManager
-    export_manager = design.exportManager
-    root_comp = design.rootComponent
-    time_line = product.timeline
+    # Get active design
+    product = app.activeProduct
 
-    # Get top level collections
-    all_occurrences = root_comp.allOccurrences
-    all_components = design.allComponents
+    if product is not None:
+
+        # For design type documents get the relevant properties
+        if product.productType == adsk.fusion.Design.productType:
+
+            design = adsk.fusion.Design.cast(product)
+
+            # Get Design specific elements
+            units_manager = design.fusionUnitsManager
+            export_manager = design.exportManager
+
+            if design.designType == adsk.fusion.DesignTypes.ParametricDesignType:
+                time_line = design.timeline
+
+            # Get top level collections
+            root_comp = design.rootComponent
+            all_occurrences = root_comp.allOccurrences
+            all_components = design.allComponents
 
     app_objects = {
         'app': app,
@@ -57,10 +75,13 @@ def start_group():
     app_objects = get_app_objects()
 
     # Start time line group
-    start_index = app_objects['time_line'].markerPosition
+    if app_objects['time_line'] is not None:
+        start_index = app_objects['time_line'].markerPosition
 
-    return start_index
+        return start_index
 
+    else:
+        return -1
 
 def end_group(start_index):
     """
@@ -74,9 +95,15 @@ def end_group(start_index):
     # Gets necessary application objects
     app_objects = get_app_objects()
 
-    end_index = app_objects['time_line'].markerPosition - 1
+    if app_objects['time_line'] is not None:
+        end_index = app_objects['time_line'].markerPosition - 1
 
-    app_objects['time_line'].timelineGroups.add(start_index, end_index)
+        if end_index > 0 and start_index > 0:
+            app_objects['time_line'].timelineGroups.add(start_index, end_index)
+
+            return True
+
+    return False
 
 
 def import_dxf(dxf_file, component, plane) -> adsk.core.ObjectCollection:
