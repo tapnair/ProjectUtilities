@@ -67,7 +67,9 @@ def export_active_doc(output_folder, file_types):
 
         if file_types.item(i).isSelected:
 
-            export_name = output_folder + app.activeDocument.name + export_extensions[i]
+            doc_name = app.activeDocument.name
+            doc_name = doc_name[:doc_name.rfind(' v')]
+            export_name = output_folder + doc_name + export_extensions[i]
             export_name = dup_check(export_name)
             export_options = export_functions[i](export_name)
             export_mgr.execute(export_options)
