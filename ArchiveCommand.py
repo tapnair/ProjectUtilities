@@ -11,8 +11,16 @@ from .Fusion360Utilities.Fusion360CommandBase import Fusion360CommandBase
 
 
 def export_folder(root_folder, output_folder, file_types):
+
     for folder in root_folder.dataFolders:
-        export_folder(folder, output_folder, file_types)
+
+        new_output_folder = output_folder + folder.name + '/'
+
+        # Create if doesn't exist
+        if not os.path.exists(new_output_folder):
+            os.makedirs(new_output_folder)
+            export_folder(folder, new_output_folder, file_types)
+
     for file in root_folder.dataFiles:
         if file.fileExtension == "f3d":
             open_doc(file, output_folder, file_types)
@@ -59,6 +67,7 @@ def export_active_doc(output_folder, file_types):
 
         if file_types.item(i).isSelected:
             export_name = output_folder + app.activeDocument.name + export_extensions[i]
+            get_app_objects()['ui'].messageBox(export_name)
             export_name = dup_check(export_name)
             export_options = export_functions[i](export_name)
             export_mgr.execute(export_options)
