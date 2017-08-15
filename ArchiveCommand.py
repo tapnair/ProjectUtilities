@@ -10,7 +10,7 @@ from .Fusion360Utilities.Fusion360Utilities import get_app_objects
 from .Fusion360Utilities.Fusion360CommandBase import Fusion360CommandBase
 
 
-def export_folder(root_folder, output_folder, file_types):
+def export_folder(root_folder, output_folder, file_types, write_version):
 
     for folder in root_folder.dataFolders:
 
@@ -19,11 +19,11 @@ def export_folder(root_folder, output_folder, file_types):
         # Create if doesn't exist
         if not os.path.exists(new_output_folder):
             os.makedirs(new_output_folder)
-            export_folder(folder, new_output_folder, file_types)
+        export_folder(folder, new_output_folder, file_types, write_version)
 
     for file in root_folder.dataFiles:
         if file.fileExtension == "f3d":
-            open_doc(file, output_folder, file_types)
+            open_doc(file, output_folder, file_types, write_version)
 
 
 def dup_check(name):
@@ -50,7 +50,7 @@ def get_file_name(project_name):
     return default_path
 
 
-def export_active_doc(output_folder, file_types):
+def export_active_doc(output_folder, file_types, write_version):
     app = adsk.core.Application.get()
     design = app.activeProduct
     export_mgr = design.exportManager
@@ -68,7 +68,10 @@ def export_active_doc(output_folder, file_types):
         if file_types.item(i).isSelected:
 
             doc_name = app.activeDocument.name
-            doc_name = doc_name[:doc_name.rfind(' v')]
+
+            if not write_version:
+                doc_name = doc_name[:doc_name.rfind(' v')]
+
             export_name = output_folder + doc_name + export_extensions[i]
             export_name = dup_check(export_name)
             export_options = export_functions[i](export_name)
@@ -77,14 +80,14 @@ def export_active_doc(output_folder, file_types):
             # get_app_objects()['ui'].messageBox(export_name)
 
 
-def open_doc(data_file, output_folder, file_types):
+def open_doc(data_file, output_folder, file_types, write_version):
     app = adsk.core.Application.get()
 
     try:
         document = app.documents.open(data_file, True)
         if document is not None:
             document.activate()
-            export_active_doc(output_folder, file_types)
+            export_active_doc(output_folder, file_types, write_version)
 
     except:
         pass
@@ -106,7 +109,9 @@ class ArchiveCommand(Fusion360CommandBase):
         file_types = inputs.itemById('file_type_input').listItems
 
         app = adsk.core.Application.get()
-        export_folder(app.data.activeProject.rootFolder, output_path, file_types)
+        write_version = inputs.itemById('write_version').value
+
+        export_folder(app.data.activeProject.rootFolder, output_path, file_types, write_version)
 
         close_command = get_app_objects()['ui'].commandDefinitions.itemById('cmdID_Close_Docs')
         close_command.execute()
@@ -133,5 +138,7 @@ class ArchiveCommand(Fusion360CommandBase):
         drop_input_list.add('SMT', False)
         drop_input_list.add('F3D', False)
         drop_input_list.add('STL', False)
+
+        command_inputs.addBoolValueInput('write_version', 'Write versions to output file names?', True)
 
 
