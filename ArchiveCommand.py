@@ -66,11 +66,13 @@ def export_active_doc(output_folder, file_types):
     for i in range(file_types.count):
 
         if file_types.item(i).isSelected:
+
             export_name = output_folder + app.activeDocument.name + export_extensions[i]
-            get_app_objects()['ui'].messageBox(export_name)
             export_name = dup_check(export_name)
             export_options = export_functions[i](export_name)
             export_mgr.execute(export_options)
+
+            # get_app_objects()['ui'].messageBox(export_name)
 
 
 def open_doc(data_file, output_folder, file_types):
