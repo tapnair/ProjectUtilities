@@ -14,7 +14,7 @@ def export_folder(root_folder, output_folder, file_types, write_version):
 
     for folder in root_folder.dataFolders:
 
-        new_output_folder = output_folder + folder.name + '/'
+        new_output_folder = os.path.join(output_folder, folder.name, "")
 
         # Create if doesn't exist
         if not os.path.exists(new_output_folder):
@@ -36,18 +36,25 @@ def dup_check(name):
 
 
 # Creates directory and returns file name for settings file
-def get_file_name(project_name):
-    # Get Home directory
-    default_path = expanduser("~")
-    default_path += '/ProjectUtilities/'
-    default_path += project_name
-    default_path += '/'
+def get_default_folder(project_name):
+    # Get user's home directory
+    default_dir = expanduser("~")
 
-    # Create if doesn't exist
-    if not os.path.exists(default_path):
-        os.makedirs(default_path)
+    # Create a subdirectory for this application settings
+    default_dir = os.path.join(default_dir, 'ProjectUtilities', "")
 
-    return default_path
+    # Create the folder if it does not exist
+    if not os.path.exists(default_dir):
+        os.makedirs(default_dir)
+
+    # Create a subdirectory for this application settings
+    project_dir = os.path.join(default_dir, project_name, "")
+
+    # Create the folder if it does not exist
+    if not os.path.exists(project_dir):
+        os.makedirs(project_dir)
+
+    return project_dir
 
 
 def export_active_doc(output_folder, file_types, write_version):
@@ -72,7 +79,8 @@ def export_active_doc(output_folder, file_types, write_version):
             if not write_version:
                 doc_name = doc_name[:doc_name.rfind(' v')]
 
-            export_name = output_folder + doc_name + export_extensions[i]
+            export_doc_name = doc_name + export_extensions[i]
+            export_name = os.path.join(output_folder, export_doc_name)
             export_name = dup_check(export_name)
             export_options = export_functions[i](export_name)
             export_mgr.execute(export_options)
@@ -125,7 +133,7 @@ class ArchiveCommand(Fusion360CommandBase):
         project_select = command_inputs.addStringValueInput('project_select', "Project to Archive: ", project_name)
         project_select.isReadOnly = True
 
-        default_path = get_file_name(project_name)
+        default_path = get_default_folder(project_name)
         command_inputs.addStringValueInput('output_path', 'Output Path: ', default_path)
 
         drop_input_list = command_inputs.addDropDownCommandInput('file_type_input', 'Export Types',

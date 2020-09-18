@@ -81,17 +81,24 @@ def get_file_path():
     active_project = app.data.activeProject
     project_name = active_project.name
 
-    # Get Home directory
-    default_path = expanduser("~")
-    default_path += '/ProjectUtilities/'
-    default_path += project_name
-    default_path += '/'
+    # Get user's home directory
+    default_dir = expanduser("~")
 
-    # Create if doesn't exist
-    if not os.path.exists(default_path):
-        os.makedirs(default_path)
+    # Create a subdirectory for this application settings
+    default_dir = os.path.join(default_dir, 'ProjectUtilities', "")
 
-    return default_path
+    # Create the folder if it does not exist
+    if not os.path.exists(default_dir):
+        os.makedirs(default_dir)
+
+    # Create a subdirectory for this application settings
+    project_dir = os.path.join(default_dir, project_name, "")
+
+    # Create the folder if it does not exist
+    if not os.path.exists(project_dir):
+        os.makedirs(project_dir)
+
+    return project_dir
 
 
 def save_data(file_name, stats):
