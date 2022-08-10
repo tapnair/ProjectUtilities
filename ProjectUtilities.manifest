@@ -1,12 +1,12 @@
 {
 	"autodeskProduct":	"Fusion360",
 	"type":	"addin",
-	"id":	"67fd07db-dabd-4e8c-a178-9a33c5134c39",
+	"id":	"506eb722-8f4e-4006-92f5-794868633c34",
 	"author":	"Patrick Rainsberry",
 	"description":	{
-		"":	"Set of useful tools for exporting, importing and managing Fusion 360 projects."
+		"":	"Set of Utilities for Managing Fusion 360 Projects"
 	},
-	"version":	"1.0.0",
+	"version":	"1.0",
 	"runOnStartup":	false,
 	"supportedOS":	"windows|mac",
 	"editEnabled":	true
