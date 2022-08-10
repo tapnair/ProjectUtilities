@@ -11,7 +11,7 @@
 
 import os
 
-DEBUG = False
+DEBUG = True
 
 ADDIN_NAME = os.path.basename(os.path.dirname(__file__))
 COMPANY_NAME = "Autodesk"
@@ -26,14 +26,27 @@ design_workspace = 'FusionSolidEnvironment'
 utilities_tab_id = 'ToolsTab'
 utilities_tab_name = 'UTILITIES'
 
-project_utilities_panel_name = 'DATA'
-project_utilities_panel_id = f'{ADDIN_NAME}_data_panel'
+project_utilities_panel_name = 'Projects'
+project_utilities_panel_id = f'{ADDIN_NAME}_project_utilities_panel'
 project_utilities_panel_after = 'SolidScriptsAddinsPanel'
 
-# Reference for use in some commands
-all_workspace_names = [
-    'FusionSolidEnvironment', 'GenerativeEnvironment', 'PCBEnvironment', 'PCB3DEnvironment', 'Package3DEnvironment',
-    'FusionRenderEnvironment', 'Publisher3DEnvironment', 'SimulationEnvironment', 'CAMEnvironment', 'DebugEnvironment',
-    'FusionDocumentationEnvironment', 'ElectronEmptyLbrEnvironment', 'ElectronDeviceEnvironment',
-    'ElectronFootprintEnvironment', 'ElectronSymbolEnvironment', 'ElectronPackageEnvironment'
-]
+
+# *************************** Default Options ****************************
+
+# When set True, it will skip import when file already exists in project
+SKIP_IMPORT_ON_DUPLICATES = True
+
+# When set True, it will skip exporting files with parent references
+SKIP_EXPORT_ON_PARENTS = True
+
+# When set True, it will skip exporting files with child references
+SKIP_EXPORT_ON_CHILDREN = True
+
+# When set True, will skip export when file already exists in folder
+SKIP_EXPORT_ON_DUPLICATES = True
+
+# When set True, will show text command palettes automatically
+# Particularly useful when running export command
+# For mass distribution should probably be set False
+AUTO_SHOW_TEXT_COMMANDS = False
+# ***********************************************************************

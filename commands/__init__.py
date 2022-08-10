@@ -1,15 +1,11 @@
-# Here you define the commands that will be added to your add-in.
-
-# If you want to add an additional command, duplicate one of the existing directories and import it here.
-# You need to use aliases (import "entry" as "my_module") assuming you have the default module named "entry".
-from .exporter import entry as exporter
-# from .importer import entry as importer
+from .export_project import entry as export_project
+from .import_folder import entry as import_folder
 # from .stats import entry as stats
 
 # Fusion will automatically call the start() and stop() functions.
 commands = [
-    exporter,
-    # importer,
+    export_project,
+    import_folder,
     # stats,
 ]
 
