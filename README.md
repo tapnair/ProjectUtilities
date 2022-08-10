@@ -111,6 +111,18 @@ AUTO_SHOW_TEXT_COMMAND_PALETTE = False
 
 ----
 
+## TODO
+* Add support for Zip File import
+* Icons
+* Better feedback for Export and what files need manual export
+
+## Enhancements
+* Add option for import to existing project?
+* Add more tooltips and help docs?
+* Move strings to standalone doc?
+* Localization?
+* Docs? Video?
+
 ## License
 Copyright 2022 by Patrick Rainsberry
 
